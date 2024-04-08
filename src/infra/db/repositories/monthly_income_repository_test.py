@@ -42,5 +42,3 @@ def test_insert_monthly_income():
     connection.execute(text(f'''
                             DELETE FROM monthly_income where family_id = {registry.family_id}'''))
     connection.commit()
-    
-    
