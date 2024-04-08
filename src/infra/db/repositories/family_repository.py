@@ -1,7 +1,10 @@
+from typing import List
 from src.infra.db.settings.connection import DBConnectionHandler
 from src.infra.db.entities.family import Family as FamilyEntity
+from src.data.interfaces.family_repository import FamilyRepositoryInterface
+from src.domain.models.family import Family
 
-class FamilyRepository:
+class FamilyRepository(FamilyRepositoryInterface):
     
     @classmethod
     def insert_family(cls, family_name: str, family_adress: str, phone: str, email: str) -> None:
@@ -20,7 +23,7 @@ class FamilyRepository:
                 raise exception
     
     @classmethod
-    def select_family(cls, family_name: str) -> any:
+    def select_family(cls, family_name: str) -> List[Family]:
         with DBConnectionHandler() as database:
             try:
                 family = (
