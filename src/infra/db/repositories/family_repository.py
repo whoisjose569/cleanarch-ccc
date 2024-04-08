@@ -18,3 +18,15 @@ class FamilyRepository:
             except Exception as exception:
                 database.session.rollback()
                 raise exception
+    
+    @classmethod
+    def select_family(cls, family_name: str) -> any:
+        with DBConnectionHandler() as database:
+            try:
+                family = (
+                    database.session.query(FamilyEntity).filter(FamilyEntity.family_name == family_name).all()
+                )
+                return family
+            except Exception as exception:
+                database.session.rollback()
+                raise exception
