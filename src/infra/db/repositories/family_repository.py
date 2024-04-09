@@ -16,6 +16,9 @@ class FamilyRepository(FamilyRepositoryInterface):
                     phone = phone,
                     email = email
                 )
+                existing_family = database.session.query(FamilyEntity).filter(FamilyEntity.email == email).first()
+                if existing_family:
+                    raise Exception 
                 database.session.add(new_registry),
                 database.session.commit()
             except Exception as exception:

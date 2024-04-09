@@ -23,7 +23,7 @@ class MonthlyIncomeRepository:
         with DBConnectionHandler() as database:
             try:
                 monthly_income = (
-                    database.session.query(MonthlyIncomeRepository).filter(MonthlyIncomeEntity.family_id == family_id).all()
+                    database.session.query(MonthlyIncomeEntity).filter(MonthlyIncomeEntity.family_id == family_id).all()
                 )
                 return monthly_income
             except Exception as exception:

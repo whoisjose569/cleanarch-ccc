@@ -8,11 +8,14 @@ class FamilyFinderController(ControllerInterface):
         self.__use_case = use_case
         
     def handle(self, http_request: HttpRequest) -> HttpResponse:
-        family_name = http_request.query_params['family_name']
-        
-        response = self.__use_case.find(family_name)
-        
-        return HttpResponse(
-            status_code=200,
-            body={"data": response}
-        )
+        try:
+            family_name = http_request.query_params['family_name']
+            
+            response = self.__use_case.find(family_name)
+            
+            return HttpResponse(
+                status_code=200,
+                body={"data": response}
+            )
+        except:
+            return HttpResponse(status_code=404, body={"error"})

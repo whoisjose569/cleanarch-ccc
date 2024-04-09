@@ -16,33 +16,3 @@ class PaidBillsFinderController(ControllerInterface):
             status_code=200,
             body={"data": response}
         )
-    
-    def handle_by_value(self, http_request: HttpRequest) -> HttpResponse:
-        value = http_request.query_params['value']
-        
-        response = self.__use_case.find_by_value(value)
-        
-        return HttpResponse(
-            status_code=200,
-            body={"data": response}
-        )
-
-    def handle_by_type(self, http_request: HttpRequest) -> HttpResponse:
-        type = http_request.query_params['type']
-        
-        response = self.__use_case.find_by_type(type)
-        
-        return HttpResponse(
-            status_code=200,
-            body={"data": response}
-        )
-    
-    def handle_by_payment_date(self, http_request: HttpRequest) -> HttpResponse:
-        payment_date = http_request.query_params['payment_date']
-        
-        response = self.__use_case.find_by_payment_date(payment_date)
-        
-        return HttpResponse(
-            status_code=200,
-            body={"data": response}
-        )

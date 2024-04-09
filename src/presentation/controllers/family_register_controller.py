@@ -8,13 +8,15 @@ class FamilyRegisterController(ControllerInterface):
         self.__use_case = use_case
 
     def handle(self, http_request: HttpRequest) -> HttpResponse:
-        family_name = http_request.body['family_name']
-        family_address = http_request.body['family_address']
-        phone = http_request.body['phone']
-        email = http_request.body['email']
-        response = self.__use_case.register(family_name, family_address, phone, email)
-        
-        return HttpResponse(
-            status_code = 200,
+        try:
+            family_name = http_request.body['family_name']
+            family_address = http_request.body['family_address']
+            phone = http_request.body['phone']
+            email = http_request.body['email']
+            response = self.__use_case.register(family_name, family_address, phone, email)
+            return HttpResponse(
+            status_code = 201,
             body={"data": response}
         )
+        except:
+            return HttpResponse(status_code=400, body={"error"})

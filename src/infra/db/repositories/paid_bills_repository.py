@@ -18,49 +18,13 @@ class PaidBillsRepository:
             except Exception as exception:
                 database.session.rollback()
                 raise exception
-    
-    @classmethod
-    def select_paid_bill_by_type(cls, type: str):
-        with DBConnectionHandler() as database:
-            try:
-                paid_bills = (
-                    database.session.query(PaidBillsEntity).filter(PaidBillsEntity.type == type).all()
-                )
-                return paid_bills
-            except Exception as exception:
-                database.session.rollback()
-                raise exception
-
-    @classmethod
-    def select_paid_bill_by_value(cls, value: float):
-        with DBConnectionHandler() as database:
-            try:
-                paid_bills = (
-                    database.session.query(PaidBillsEntity).filter(PaidBillsEntity.value == value).all()
-                )
-                return paid_bills
-            except Exception as exception:
-                database.session.rollback()
-                raise exception
-
-    @classmethod
-    def select_paid_bill_by_payment_date(cls, payment_date: str):
-        with DBConnectionHandler() as database:
-            try:
-                paid_bills = (
-                    database.session.query(PaidBillsEntity).filter(PaidBillsEntity.payment_date == payment_date).all()
-                )
-                return paid_bills
-            except Exception as exception:
-                database.session.rollback()
-                raise exception
 
     @classmethod
     def select_paid_bill_by_family_id(cls, family_id: int):
         with DBConnectionHandler() as database:
             try:
                 paid_bills = (
-                    database.session.query(PaidBillsEntity).filter(PaidBillsEntity.family_id == family_id).first()
+                    database.session.query(PaidBillsEntity).filter(PaidBillsEntity.family_id == family_id).all()
                 )
                 return paid_bills
             except Exception as exception:
