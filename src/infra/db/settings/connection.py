@@ -8,7 +8,7 @@ class DBConnectionHandler:
         self.__connection_string = "{}://{}:{}@{}:{}/{}".format(
             'mysql+pymysql',
             'root',
-            '151096ara',
+            getenv('MYSQL_PASSWORD'),
             'localhost',
             '3306',
             'ccc_database'
