@@ -2,6 +2,7 @@ from typing import Dict, List
 from src.domain.use_cases.family_finder import FamilyFinder as FamilyFinderInterface
 from src.data.interfaces.family_repository import FamilyRepositoryInterface
 from src.domain.models.family import Family
+from src.errors.types import HttpNotFoundError, HttpBadRequestError
 
 class FamilyFinder(FamilyFinderInterface):
     def __init__(self, family_repository: FamilyRepositoryInterface) -> None:
@@ -16,19 +17,19 @@ class FamilyFinder(FamilyFinderInterface):
     @classmethod
     def __validate_name(cls, family_name: str) -> None:
         if not family_name.isalpha():
-            raise Exception('Nome Invalido')
+            raise HttpBadRequestError('Nome Invalido')
         
         if len(family_name) > 15:
-            raise Exception('Nome muito grande')
+            raise HttpBadRequestError('Nome muito grande')
         
         if len(family_name) < 4:
-            raise Exception('Nome muito pequeno')
+            raise HttpBadRequestError('Nome muito pequeno')
     
 
     def __search_family(self, family_name: str) -> List[Family]:
         family = self.__family_repository.select_family(family_name)
         if family == []:
-            raise Exception('Familia não encontrada')
+            raise HttpNotFoundError('Familia não encontrada')
         return family
 
     @classmethod

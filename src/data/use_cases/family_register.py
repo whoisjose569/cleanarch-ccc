@@ -1,6 +1,7 @@
 from typing import Dict
 from src.domain.use_cases.family_register import FamilyRegister as FamilyRegisterInterface
 from src.data.interfaces.family_repository import FamilyRepositoryInterface
+from src.errors.types import HttpBadRequestError
 
 class FamilyRegister(FamilyRegisterInterface):
     def __init__(self, family_repository: FamilyRepositoryInterface) -> None:
@@ -18,21 +19,21 @@ class FamilyRegister(FamilyRegisterInterface):
     @classmethod
     def __validate_name(cls, family_name: str) -> None:
         if len(family_name) > 30:
-            raise Exception('Nome muito grande')
+            raise HttpBadRequestError('Nome muito grande')
         
         if len(family_name) < 3:
-            raise Exception('Nome muito pequeno')
+            raise HttpBadRequestError('Nome muito pequeno')
     
     @classmethod
     def __validate_email(cls, email: str) -> None:
         if len(email) < 5:
-            raise Exception('Email invalido')
+            raise HttpBadRequestError('Email invalido')
         
     
     @classmethod
     def __validate_phone(cls, phone: str) -> None:
         if len(phone) < 6:
-            raise Exception('Numero de telefone curto')
+            raise HttpBadRequestError('Numero de telefone curto')
     
     def __registry_family_informations(self, family_name: str, family_address: str, phone: str, email: str) -> None:
         self.__family_repository.insert_family(family_name, family_address, phone, email)

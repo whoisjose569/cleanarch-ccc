@@ -1,7 +1,7 @@
 from typing import Dict
 from src.domain.use_cases.monthly_income_register import MonthlyIncomeRegister as MonthlyIncomeRegisterInterface
 from src.data.interfaces.monthly_income_repository import MonthlyIncomeRepository
-
+from src.errors.types import HttpBadRequestError
 class MonthlyIncomeRegister(MonthlyIncomeRegisterInterface):
     def __init__(self, monthly_income: MonthlyIncomeRepository) -> None:
         self.__monthly_income = monthly_income
@@ -16,7 +16,7 @@ class MonthlyIncomeRegister(MonthlyIncomeRegisterInterface):
     @classmethod
     def __validate_income(self, income: float):
         if income < 0:
-            raise Exception('Valor negativo')
+            raise HttpBadRequestError('Valor negativo')
     
     
     def registry_monthly_income_informations(self, family_id: int, income: float, date: str):
