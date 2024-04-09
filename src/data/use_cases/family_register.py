@@ -17,9 +17,6 @@ class FamilyRegister(FamilyRegisterInterface):
     
     @classmethod
     def __validate_name(cls, family_name: str) -> None:
-        if not family_name.isalpha():
-            raise Exception('Nome invalido')
-        
         if len(family_name) > 15:
             raise Exception('Nome muito grande')
         
