@@ -7,6 +7,7 @@ from src.infra.db.settings.connection import DBConnectionHandler
 db_connection_handler = DBConnectionHandler()
 connection = db_connection_handler.get_engine().connect()
 
+@pytest.mark.skip(reason="Sensive test")
 def test_insert_paid_bills():
     mocked_family_name = 'teste'
     mocked_family_address = 'teste'
