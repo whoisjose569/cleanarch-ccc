@@ -4,4 +4,4 @@ from typing import Dict
 class FamilyRegister(ABC):
     
     @abstractmethod
-    def register(self, family_name: str, family_address: str, phone: str, email: str) -> Dict: pass
+    def register(self, family_name: str, senha: str, phone: str, email: str) -> Dict: pass

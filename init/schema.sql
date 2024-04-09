@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS ccc_database;
 CREATE TABLE IF NOT EXISTS `ccc_database`.`family`(
     id BIGINT NOT NULL AUTO_INCREMENT,
     family_name VARCHAR(100) NOT NULL,
-    family_address VARCHAR(255),
+    senha VARCHAR(50),
     phone VARCHAR(25),
     email VARCHAR(100),
     PRIMARY KEY(id)

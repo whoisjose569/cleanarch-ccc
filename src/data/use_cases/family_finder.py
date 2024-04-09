@@ -37,7 +37,7 @@ class FamilyFinder(FamilyFinderInterface):
         attributes = []
         for family in familys:
             attributes.append(
-                {"family_name": family.family_name, "family_address": family.family_address, "phone": family.phone, "email": family.email}
+                {"family_name": family.family_name, "senha": family.senha, "phone": family.phone, "email": family.email}
             )
         reponse = {
             "type": "Family",

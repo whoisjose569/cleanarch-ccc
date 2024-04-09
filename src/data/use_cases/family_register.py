@@ -7,13 +7,13 @@ class FamilyRegister(FamilyRegisterInterface):
     def __init__(self, family_repository: FamilyRepositoryInterface) -> None:
         self.__family_repository = family_repository
     
-    def register(self, family_name: str, family_address: str, phone: str, email: str) -> Dict:
+    def register(self, family_name: str, senha: str, phone: str, email: str) -> Dict:
         self.__validate_name(family_name)
         self.__validate_email(email)
         self.__validate_phone(phone)
         
-        self.__registry_family_informations(family_name, family_address, phone, email)
-        response = self.__format_response(family_name, family_address, phone, email)
+        self.__registry_family_informations(family_name, senha, phone, email)
+        response = self.__format_response(family_name, senha, phone, email)
         return response
     
     @classmethod
@@ -35,17 +35,17 @@ class FamilyRegister(FamilyRegisterInterface):
         if len(phone) < 6:
             raise HttpBadRequestError('Numero de telefone curto')
     
-    def __registry_family_informations(self, family_name: str, family_address: str, phone: str, email: str) -> None:
-        self.__family_repository.insert_family(family_name, family_address, phone, email)
+    def __registry_family_informations(self, family_name: str, senha: str, phone: str, email: str) -> None:
+        self.__family_repository.insert_family(family_name, senha, phone, email)
     
     @classmethod
-    def __format_response(cls, family_name, family_address, phone, email) -> Dict:
+    def __format_response(cls, family_name, senha, phone, email) -> Dict:
         response = {
             "type": "Family",
             "count": 1,
             "attributes": {
                 "family_name": family_name,
-                "family_address": family_address,
+                "senha": senha,
                 "phone": phone,
                 "email": email,
             }

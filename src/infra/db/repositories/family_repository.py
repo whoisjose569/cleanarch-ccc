@@ -12,7 +12,7 @@ class FamilyRepository(FamilyRepositoryInterface):
             try:
                 new_registry = FamilyEntity(
                     family_name = family_name,
-                    family_address = family_adress,
+                    senha = family_adress,
                     phone = phone,
                     email = email
                 )

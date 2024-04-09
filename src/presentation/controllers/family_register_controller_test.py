@@ -3,7 +3,7 @@ from src.data.tests.family_register import FamilyRegisterSpy
 
 class HttpRequestMock():
     def __init__(self) -> None:
-        self.body = {"family_name": "teste", "family_address": "teste", "phone": "12345", "email": "teste@email"}
+        self.body = {"family_name": "teste", "senha": "teste", "phone": "12345", "email": "teste@email"}
 
 def test_handle():
     http_request_mock = HttpRequestMock()
@@ -14,7 +14,7 @@ def test_handle():
     body_data = http_request_mock.body
     
     assert body_data["family_name"] == "teste"
-    assert body_data["family_address"] == "teste"
+    assert body_data["senha"] == "teste"
     assert body_data["phone"] == "12345"
     assert body_data["email"] == "teste@email"
     assert response.status_code == 200

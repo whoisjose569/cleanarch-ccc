@@ -9,12 +9,12 @@ connection = db_connection_handler.get_engine().connect()
 
 def test_insert_monthly_income():
     mocked_family_name = 'teste'
-    mocked_family_address = 'teste'
+    mocked_senha = 'teste'
     mocked_phone = 'teste'
     mocked_email = 'teste'
     
     family_repository = FamilyRepository()
-    family_repository.insert_family(mocked_family_name, mocked_family_address, mocked_phone, mocked_email)
+    family_repository.insert_family(mocked_family_name, mocked_senha, mocked_phone, mocked_email)
     
     mocked_family_id = 29
     mocked_income = 120

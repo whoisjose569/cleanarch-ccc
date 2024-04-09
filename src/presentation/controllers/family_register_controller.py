@@ -10,10 +10,10 @@ class FamilyRegisterController(ControllerInterface):
     def handle(self, http_request: HttpRequest) -> HttpResponse:
         try:
             family_name = http_request.body['family_name']
-            family_address = http_request.body['family_address']
+            senha = http_request.body['senha']
             phone = http_request.body['phone']
             email = http_request.body['email']
-            response = self.__use_case.register(family_name, family_address, phone, email)
+            response = self.__use_case.register(family_name, senha, phone, email)
             return HttpResponse(
             status_code = 201,
             body={"data": response}

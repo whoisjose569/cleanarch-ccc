@@ -11,6 +11,6 @@ class FamilyFinderSpy:
             "type": "Family",
             "count": 1,
             "attributes": [
-                {"family_name": family_name, "family_adress": "teste", "phone": "123", "email": "teste@email"}
+                {"family_name": family_name, "senha": "teste", "phone": "123", "email": "teste@email"}
             ]
         }

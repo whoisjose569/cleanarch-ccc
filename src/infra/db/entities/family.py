@@ -9,7 +9,7 @@ class Family(Base):
     
     id = Column(Integer, primary_key=True, autoincrement=True)
     family_name = Column(String, nullable=False)
-    family_address = Column(String, nullable=False)
+    senha = Column(String, nullable=False)
     phone = Column(String, nullable=False)
     email = Column(String, nullable=False)
     
