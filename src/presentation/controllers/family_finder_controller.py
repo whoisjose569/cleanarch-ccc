@@ -9,9 +9,9 @@ class FamilyFinderController(ControllerInterface):
         
     def handle(self, http_request: HttpRequest) -> HttpResponse:
         try:
-            family_name = http_request.query_params['family_name']
+            email = http_request.query_params['email']
             
-            response = self.__use_case.find(family_name)
+            response = self.__use_case.find(email)
             
             return HttpResponse(
                 status_code=200,

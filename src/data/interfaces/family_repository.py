@@ -8,4 +8,4 @@ class FamilyRepositoryInterface(ABC):
     def insert_family(self, family_name: str, senha: str, phone: str, email: str) -> None: pass
     
     @abstractmethod
-    def select_family(self, family_name: str) -> List[Family]: pass
+    def select_family(self, email: str) -> List[Family]: pass

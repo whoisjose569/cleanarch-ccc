@@ -8,9 +8,8 @@ class FamilyFinder(FamilyFinderInterface):
     def __init__(self, family_repository: FamilyRepositoryInterface) -> None:
         self.__family_repository = family_repository
     
-    def find(self, family_name: str) -> Dict:
-        self.__validate_name(family_name)
-        familys = self.__search_family(family_name)
+    def find(self, email: str) -> Dict:
+        familys = self.__search_family(email)
         response = self.__format_response(familys)
         return response
     
@@ -26,8 +25,8 @@ class FamilyFinder(FamilyFinderInterface):
             raise HttpBadRequestError('Nome muito pequeno')
     
 
-    def __search_family(self, family_name: str) -> List[Family]:
-        family = self.__family_repository.select_family(family_name)
+    def __search_family(self, email: str) -> List[Family]:
+        family = self.__family_repository.select_family(email)
         if family == []:
             raise HttpNotFoundError('Familia não encontrada')
         return family
