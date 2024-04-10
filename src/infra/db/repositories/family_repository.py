@@ -3,7 +3,7 @@ from src.infra.db.settings.connection import DBConnectionHandler
 from src.infra.db.entities.family import Family as FamilyEntity
 from src.data.interfaces.family_repository import FamilyRepositoryInterface
 from src.domain.models.family import Family
-from src.infra.providers import hash_provider, token_provider
+from src.domain.providers import hash_provider, token_provider
 
 class FamilyRepository(FamilyRepositoryInterface):
     

@@ -2,6 +2,7 @@ from passlib.context import CryptContext
 
 pwd_context = CryptContext(schemes=['bcrypt'])
 
+
 def generate_hash(text):
     return pwd_context.hash(text)
 
