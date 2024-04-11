@@ -12,18 +12,6 @@ class FamilyFinder(FamilyFinderInterface):
         familys = self.__search_family(email)
         response = self.__format_response(familys)
         return response
-    
-    @classmethod
-    def __validate_name(cls, family_name: str) -> None:
-        if not family_name.isalpha():
-            raise HttpBadRequestError('Nome Invalido')
-        
-        if len(family_name) > 15:
-            raise HttpBadRequestError('Nome muito grande')
-        
-        if len(family_name) < 4:
-            raise HttpBadRequestError('Nome muito pequeno')
-    
 
     def __search_family(self, email: str) -> List[Family]:
         family = self.__family_repository.select_family(email)
