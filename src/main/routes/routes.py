@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, HTTPException, Depends, Body
+from fastapi import APIRouter, Request, HTTPException, Depends
 from src.main.adapters.request_adapter import request_adapter
 from src.main.composers.family_finder_composer import family_finder_composer
 from src.main.composers.family_register_composer import family_register_composer
@@ -7,15 +7,14 @@ from src.main.composers.monthly_income_register_controller import monthly_income
 from src.main.composers.paid_bills_finder_composer import paid_bills_finder_composer
 from src.main.composers.paid_bills_register_composer import paid_bills_register_composer
 from src.errors.error_handler import handle_errors
-from datetime import datetime, timedelta
-from jose import jwt, JWTError
 from fastapi.security import OAuth2PasswordBearer
 from src.data.use_cases.family_finder import FamilyFinder
 from src.infra.db.repositories.family_repository import FamilyRepository
 import json
 from src.domain.providers.token_provider import verify_access_token
 from src.domain.providers.token_provider import create_access_token
-from src.domain.providers.hash_provider import verify_hash, generate_hash
+from src.domain.providers.hash_provider import verify_hash
+from src.presentation.schemas.family_schema import FamilySchema
 
 oauth2_schema = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -32,10 +31,10 @@ async def find_family(request: Request):
 
 
 @router.post('/family/')
-async def register_family(request: Request):
+async def register_family(family: FamilySchema):
     http_response = None
     try:
-        http_response = await request_adapter(request, family_register_composer())
+        http_response = await request_adapter(family, family_register_composer())
     except Exception as exception:
         http_response = handle_errors(exception)
     return http_response.body, http_response.status_code
@@ -94,6 +93,10 @@ async def generate_token(request: Request):
         if valid_email != email:
             return HTTPException(status_code=400, detail="email invalid")
 
+        valid_password = verify_hash(senha, localized_family['attributes'][0]['senha'])
+
+        if not valid_password:
+            return HTTPException(status_code=400, detail="senha invalid")
         dict = {
             "email": email,
             "password": senha

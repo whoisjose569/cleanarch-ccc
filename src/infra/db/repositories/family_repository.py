@@ -9,9 +9,10 @@ class FamilyRepository(FamilyRepositoryInterface):
     
     @classmethod
     def insert_family(cls, family_name: str, senha: str, phone: str, email: str) -> None:
-        password = hash_provider.generate_hash(senha)
+        
         with DBConnectionHandler() as database:
             try:
+                password = hash_provider.generate_hash(senha)
                 new_registry = FamilyEntity(
                     family_name = family_name,
                     senha = password,
