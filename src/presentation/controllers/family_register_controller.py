@@ -10,10 +10,10 @@ class FamilyRegisterController(ControllerInterface):
 
     def handle(self, family: FamilySchema) -> HttpResponse:
         try:
-            family_name = family['family_name']
-            senha = family['senha']
-            phone = family['phone']
-            email = family['email']
+            family_name = family.family_name
+            senha = family.senha
+            phone = family.phone
+            email = family.email
             response = self.__use_case.register(family_name, senha, phone, email)
             return HttpResponse(
             status_code = 201,

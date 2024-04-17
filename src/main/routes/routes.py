@@ -15,6 +15,7 @@ from src.domain.providers.token_provider import verify_access_token
 from src.domain.providers.token_provider import create_access_token
 from src.domain.providers.hash_provider import verify_hash
 from src.presentation.schemas.family_schema import FamilySchema
+from src.presentation.schemas.monthly_income_schema import MonthlyIncomeSchema
 
 oauth2_schema = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -50,10 +51,10 @@ async def find_income(request: Request):
     return http_response.body, http_response.status_code
 
 @router.post('/monthlyincome/', dependencies=[Depends(verify_access_token)])
-async def register_income(request: Request):
+async def register_income(monthly_income: MonthlyIncomeSchema):
     http_response = None
     try:
-        http_response = await request_adapter(request, monthly_income_register_composer())
+        http_response = await request_adapter(monthly_income, monthly_income_register_composer())
     except Exception as exception:
         http_response = handle_errors(exception)
     return http_response.body, http_response.status_code
